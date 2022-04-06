@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Post;
+use App\Models\Category;
 
 class PostController extends Controller
 {
     public function __construct()
     {
-       $this->middleware('auth',['except' => ['index', 'read']]);
+       $this->middleware('auth',['except' => ['index', 'show', 'welcome']],);
     }
 
     /**
@@ -143,6 +144,14 @@ class PostController extends Controller
       $post = Post::where('id', $id)->first();
       $profile->delete();
       return redirect()->route('posts')->with(['status' => 'post delete successfully']);
+    }
+
+
+    public function welcome() {
+        $posts = Post::latest()->paginate(6);
+        $categories = Category::all();
+
+        return view('welcome', compact('posts', 'categories'));
     }
 
 }
