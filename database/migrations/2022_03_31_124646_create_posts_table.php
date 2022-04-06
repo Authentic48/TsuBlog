@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if(!Schema::hasTable('posts')){
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('image');
             $table->timestamps();
         });
+       }
     }
 
     /**

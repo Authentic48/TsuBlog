@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-       /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+/**
+   * The attributes that are mass assignable.
+   *
+   * @var array<int, string>
+   */
     protected $fillable = [
         'title',
         'content',
@@ -21,12 +21,20 @@ class Post extends Model
         'user_id'
     ];
 
-    public function user(){
-      return $this->belongsToMany('App\Models\User');
-    }
+  public function user()
+  {
+    return $this->belongsToMany('App\Models\User');
+  }
     
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+  public function getRouteKeyName()
+  {
+    return ['slug' => 'slug', 'tag' => 'tag', 'category' => 'category'];
+  }
+
+
+
+  public function tags()
+  {
+    return $this->hasMany('App\Models\Tag');
+  }
 }
