@@ -33,7 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.create');
+        return view('pages.admin.posts.create');
     }
 
     /**

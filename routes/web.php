@@ -36,5 +36,7 @@ Route::middleware(['auth'])->middleware(['admin'])->prefix('/admin/posts')->grou
  Route::patch('/update', [App\Http\Controllers\PostController::class, 'update'])->name('post.update');
 
  Route::delete('/delete', [App\Http\Controllers\PostController::class, 'delete'])->name('post.delete');
+
+ Route::get('/', [App\Http\Controllers\PostAdminController::class, 'index'])->name('post.index');
 });
 
