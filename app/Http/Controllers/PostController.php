@@ -50,7 +50,7 @@ class PostController extends Controller
           'required' => 'This field is required',
         ];
         $request->validate([
-            'title' => ['required'],
+            'title' => ['required', 'unique:posts'],
             'category' => ['required'],
             'content' => ['required'],
             'image' => ['required','mimes:jpeg,png,jpg,gif|max:2048']
@@ -62,19 +62,17 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->category = $request->category;
         $post->user_id =  Auth::user()->id;
-        // dd($post->user_id);
         $post->slug = Str::slug($request->input('title'), '-');
 
         if ($request->has('image'))
         {
             $image = $request->file('image');
-            $name = Str::slug($request->title).'_'.time();
+            $name = $request->file('image')->getClientOriginalName();
             $folder = '/images'; 
-            // dd($image);
-            // dd($name);
-            // dd($folder);
-            $filePath = Storage::disk('local')->putFileAs($folder, $image, $name);
-            $post->image = $filePath;
+            // $filePath = Storage::disk('local')->putFileAs($folder, , $name);
+            $filePath = $request->file('image')->storeAs($folder, $name);
+            $post->image = $name;
+            // dd($post->image);
         }
         $post->save();
         return redirect()->route('post.index')->with(['status' => 'post created successfully.']);
