@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\Category;
+use Auth;
 
 class PostController extends Controller
 {
@@ -52,27 +53,31 @@ class PostController extends Controller
             'title' => ['required'],
             'category' => ['required'],
             'content' => ['required'],
-            'image' => ['required']
+            'image' => ['required','mimes:jpeg,png,jpg,gif|max:2048']
         ],$messages);
 
         $post = new Post();
         
-        $post->title = $request ->title;
-        $post->content = $request ->content;
-        $post->city = $request ->city;
-        $post->user_id = $request ->user_id;
-        $post->slug = Str::slug($request->input('name'), '-');
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->category = $request->category;
+        $post->user_id =  Auth::user()->id;
+        // dd($post->user_id);
+        $post->slug = Str::slug($request->input('title'), '-');
 
         if ($request->has('image'))
         {
             $image = $request->file('image');
-            $name = Str::slug($request->input('name')).'_'.time();
+            $name = Str::slug($request->title).'_'.time();
             $folder = '/images'; 
-            $filePath = Storage::disk('local')->putFileAs($folder, $image, $name, 'public');
+            // dd($image);
+            // dd($name);
+            // dd($folder);
+            $filePath = Storage::disk('local')->putFileAs($folder, $image, $name);
             $post->image = $filePath;
         }
         $post->save();
-        return redirect()->route('posts')->with(['status' => 'post created successfully.']);
+        return redirect()->route('post.index')->with(['status' => 'post created successfully.']);
     }
 
     /**
