@@ -99,7 +99,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::where('id', $id)->first();
-        return view('pages.admin.edit',compact('post'));
+        return view('pages.admin.posts.edit',compact('post'));
     }
 
     /**
@@ -119,7 +119,7 @@ class PostController extends Controller
             'title' => ['required'],
             'category' => ['required'],
             'content' => ['required'],
-            'image' => ['required']
+            'image' => ['image','mimes:jpeg,png,jpg,gif|max:2048']
         ], $messages);
 
         $post = Post::where('id', $id)->first();
@@ -137,8 +137,8 @@ class PostController extends Controller
             $post->image = $filePath;
         }
 
-        $post-save();
-        return redirect('/posts')->with(['status' => 'post updated successfully.']);
+        $post->save();
+        return redirect()->route('post.index')->with(['status' => 'post updated successfully.']);
 
     }
 

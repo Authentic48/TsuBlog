@@ -15,6 +15,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
        @include('pages.admin.includes.header')

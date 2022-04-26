@@ -31,9 +31,9 @@ Route::middleware(['auth'])->middleware(['admin'])->prefix('/admin/posts')->grou
 
  Route::post('/store', [App\Http\Controllers\PostController::class, 'store'])->name('post.store');
  
- Route::get('/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
+ Route::get('/edit/{id}', [App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
 
- Route::patch('/update', [App\Http\Controllers\PostController::class, 'update'])->name('post.update');
+ Route::patch('/update/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('post.update');
 
  Route::delete('/delete', [App\Http\Controllers\PostController::class, 'delete'])->name('post.delete');
 
