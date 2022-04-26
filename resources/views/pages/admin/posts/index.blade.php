@@ -22,7 +22,12 @@
                       <p class="card-text">{{ $post->content }}</p>
                       <a href="{{ route('post.edit', $post->id) }}" class="btn btn-outline-primary btm-sm">edit</a>
 
-                      <button type="button" class="btn btn-outline-danger ">delete</button>
+                      <a  href="{{ route('post.delete', $post->id) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
+                        document.getElementById('post').submit();">delete</a>
+                         <form id="post" action="{{ route('post.delete', $post->id) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                        </form>
                     </div>
                   </div>
             </div>
