@@ -18,14 +18,20 @@
                 <h1 class="display-one">{{ $post->title }}</h1>
                 <p>{!! $post->content !!}</p>
                 <hr>
-                <a href="{{ route('post.index') }}" class="btn btn-outline-primary btn-sm">Add tags</a>
+                @foreach ($post->tags as $tags)
+                    <span>
+                        {{ $tags->name }}
+                    </span>
+                @endforeach
+                <hr>
+                <a href="{{ route('tags.create', $post->id) }}" class="btn btn-outline-primary btn-sm">Add tags</a>
             </div>
         </div>
         <div class="row">
             @foreach ($posts as $post)
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="{{ asset('storage/app/images/' . $post->image) }}" class="card-img-top"
+                        <img src="{{ asset('storage/app/images/'.$post->image) }}" class="card-img-top"
                             alt="{{ $post->title }}">
                         <div class="card-body">
                             <a href="{{ route('post.show', $post->id) }}" class="card-title">{{ $post->title }}</a>
@@ -33,7 +39,7 @@
                             <a href="{{ route('post.edit', $post->id) }}" class="btn btn-outline-primary btm-sm">edit</a>
 
                             <a href="{{ route('post.delete', $post->id) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
-                            document.getElementById('post').submit();">delete</a>
+                                document.getElementById('post').submit();">delete</a>
                             <form id="post" action="{{ route('post.delete', $post->id) }}" method="POST">
                                 @method('DELETE')
                                 @csrf

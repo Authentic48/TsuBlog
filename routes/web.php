@@ -40,5 +40,9 @@ Route::middleware(['auth'])->middleware(['admin'])->prefix('/admin/posts')->grou
  Route::get('/', [App\Http\Controllers\PostAdminController::class, 'index'])->name('post.index');
 
  Route::get('/{id}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('post.show');
+
+ Route::get('/{id}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tags.create');
+
+ Route::post('/{id}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('tags.store');
 });
 
