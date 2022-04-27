@@ -20,9 +20,9 @@
                 <hr>
                 <div class="d-flex">
                     @foreach ($post->tags as $tag)
-                    <span class="mr-3">
-                        {{ $tag->name }} <a  href="{{ route('tags.delete',[ 'id' => $post->id, 'tag_id' => $tag->id] ) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
-                            document.getElementById('post').submit();"></a>
+                    <span class="mr-4">
+                        {{ $tag->name }}<a  href="{{ route('tags.delete',[ 'id' => $post->id, 'tag_id' => $tag->id] ) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
+                            document.getElementById('post').submit();"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
                          <form id="post" action="{{ route('tags.delete', [ 'id' => $post->id, 'tag_id' => $tag->id]) }}" method="POST">
                             @method('DELETE')
