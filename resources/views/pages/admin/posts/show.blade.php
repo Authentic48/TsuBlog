@@ -18,11 +18,19 @@
                 <h1 class="display-one">{{ $post->title }}</h1>
                 <p>{!! $post->content !!}</p>
                 <hr>
-                @foreach ($post->tags as $tags)
-                    <span>
-                        {{ $tags->name }}
+                <div class="d-flex">
+                    @foreach ($post->tags as $tag)
+                    <span class="mr-3">
+                        {{ $tag->name }} <a  href="{{ route('tags.delete',[ 'id' => $post->id, 'tag_id' => $tag->id] ) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
+                            document.getElementById('post').submit();"></a>
                     </span>
+                         <form id="post" action="{{ route('tags.delete', [ 'id' => $post->id, 'tag_id' => $tag->id]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                        </form>
                 @endforeach
+                </div>
+
                 <hr>
                 <a href="{{ route('tags.create', $post->id) }}" class="btn btn-outline-primary btn-sm">Add tags</a>
             </div>

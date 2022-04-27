@@ -44,5 +44,7 @@ Route::middleware(['auth'])->middleware(['admin'])->prefix('/admin/posts')->grou
  Route::get('/{id}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tags.create');
 
  Route::post('/{id}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('tags.store');
+
+ Route::delete('/{id}/tags/{tag_id}', [App\Http\Controllers\TagController::class, 'destroy'])->name('tags.delete');
 });
 
