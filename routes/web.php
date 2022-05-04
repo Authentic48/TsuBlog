@@ -21,17 +21,17 @@ Route::get('/posts/{category}', [App\Http\Controllers\PostController::class, 'po
 
 Route::get('/posts/{category}/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
-Auth::routes();
+Auth::routes(['register' =>false, 'reset' => false, 'verify' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth'])->middleware(['admin'])->prefix('/admin/posts')->group(function () {
+Route::middleware(['auth'])->middleware(['role:admin'])->prefix('/admin/posts')->group(function () {
 
  Route::get('/create', [App\Http\Controllers\PostController::class, 'create'])->name('post.create');
 
  Route::post('/store', [App\Http\Controllers\PostController::class, 'store'])->name('post.store');
  
- Route::get('/edit/{id}', [App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
+ Route::get('/edit/{post:id}', [App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
 
  Route::patch('/update/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('post.update');
 
@@ -39,9 +39,9 @@ Route::middleware(['auth'])->middleware(['admin'])->prefix('/admin/posts')->grou
 
  Route::get('/', [App\Http\Controllers\PostAdminController::class, 'index'])->name('post.index');
 
- Route::get('/{id}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('post.show');
+ Route::get('/{post:id}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('post.show');
 
- Route::get('/{id}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tags.create');
+ Route::get('/{post:id}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tags.create');
 
  Route::post('/{id}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('tags.store');
 

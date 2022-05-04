@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
-
-class Manager
+use Auth; 
+class Role
 {
     /**
      * Handle an incoming request.
@@ -15,15 +14,15 @@ class Manager
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $role)
     {
         if (!Auth::check()) 
         {
-            return redirect()->route('login');
+          return redirect()->route('login');
         }
         $user = Auth::user();
 
-        if($user->hasRole('manager'))
+        if($user->hasRole($role))
         {
             return $next($request);
         }  

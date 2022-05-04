@@ -35,11 +35,11 @@ class PostAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::where('id', $id)->first();
+        // $post = Post::where('id', $id)->first();
         $posts = Post::latest()->where('id','!=', $post->id)->take(3)->get();
-        return view('pages.admin.posts.show', compact('post', 'posts'));
+        return view('pages.admin.posts.show', ['post' => $post, 'posts' => $posts]);
     }
 
 }

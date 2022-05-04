@@ -14,7 +14,7 @@
         </div>
         <div class="row">
             <div class="col-12 pt-2">
-                <img src="{{ asset('') }}" class="img-fluid">
+                <img src="{{ asset('images/'.$post->image) }}" class="img-fluid">
                 <h1 class="display-one">{{ $post->title }}</h1>
                 <p>{!! $post->content !!}</p>
                 <hr>
@@ -39,7 +39,7 @@
             @foreach ($posts as $post)
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="{{ asset('storage/app/images/'.$post->image) }}" class="card-img-top"
+                        <img src="{{ asset('images/'.$post->image) }}" class="card-img-top"
                             alt="{{ $post->title }}">
                         <div class="card-body">
                             <a href="{{ route('post.show', $post->id) }}" class="card-title">{{ $post->title }}</a>

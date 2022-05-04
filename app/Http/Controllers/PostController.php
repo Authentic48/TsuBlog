@@ -67,13 +67,13 @@ class PostController extends Controller
         if ($request->has('image'))
         {
             $image = $request->file('image');
-            $name = $request->file('image')->getClientOriginalName();
-            $folder = '/images'; 
-            // $filePath = Storage::disk('local')->putFileAs($folder, , $name);
-            $filePath = $request->file('image')->storeAs($folder, $name);
+            $name = time(). '.'.$request->image->extension();
+            $folder = 'images'; 
+            // $filePath = Storage::disk('public')->putFileAs($folder, $image, $name);
+            $request->image->move(public_path($folder), $name);
             $post->image = $name;
-            // dd($post->image);
         }
+        // dd(Storage::disk('local')->url($filePath));
         $post->save();
         return redirect()->route('post.index')->with(['status' => 'post created successfully.']);
     }
@@ -96,10 +96,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::where('id', $id)->first();
-        return view('pages.admin.posts.edit',compact('post'));
+        // $post = Post::where('id', $id)->first();
+        return view('pages.admin.posts.edit',['post' => $post]);
     }
 
     /**
@@ -131,10 +131,11 @@ class PostController extends Controller
         if ($request->has('image'))
         {
             $image = $request->file('image');
-            $name = Str::slug($request->input('name')).'_'.time();
+            $name = time().'.'. $request->image->extension();
             $folder = '/images'; 
-            $filePath = Storage::disk('local')->putFileAs($folder, $image, $name, 'public');
-            $post->image = $filePath;
+            $request->image->move(public_path($folder), $name);
+            // $filePath = Storage::disk('local')->putFileAs($folder, $image, $name);
+            $post->image = $name;
         }
 
         $post->save();
