@@ -21,10 +21,10 @@
                 <div class="d-flex">
                     @foreach ($post->tags as $tag)
                     <span class="mr-4">
-                        {{ $tag->name }}<a  href="{{ route('admin.tags.delete',[ 'post' => $post->id, 'tag' => $tag->id] ) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
+                        {{ $tag->name }}<a  href="{{ route('admin.tags.delete',[ 'post' => $post->id, 'id' => $tag->id]) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
                             document.getElementById('post').submit();"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
-                         <form id="post" action="{{ route('admin.tags.delete', [ 'post' => $post->id, 'tag' => $tag->id]) }}" method="POST">
+                         <form id="post" action="{{ route('admin.tags.delete', ['post' => $post->id, 'id' => $tag->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                         </form>

@@ -48,8 +48,9 @@ class TagController extends Controller
         return redirect()->route('admin.post.show', $request->post_id)->with(['status' => 'tag created successfully.']);
     }
 
-    public function destroy(Post $post, Tag $tag)
+    public function destroy($id)
     {
+      $tag = Tag::findOrFail($id);
       $tag->delete();
       return redirect()->back()->with(['status' => 'tag delete successfully']);
     }
