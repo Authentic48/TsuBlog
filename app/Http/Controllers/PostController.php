@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-       $this->middleware('auth',['except' => ['index', 'show', 'welcome']],);
+       $this->middleware('auth',['except' => ['index', 'show']],);
     }
 
     /**
@@ -75,7 +75,7 @@ class PostController extends Controller
         }
         // dd(Storage::disk('local')->url($filePath));
         $post->save();
-        return redirect()->route('post.index')->with(['status' => 'post created successfully.']);
+        return redirect()->route('admin.post.index')->with(['status' => 'post created successfully.']);
     }
 
     /**
@@ -84,10 +84,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Post $post)
     {
-        $post = Post::where('slug', $slug)->first();
-        return view('pages.posts.show', compact('post'));
+        return view('pages.posts.show',['post' => $post]);
     }
 
       /**
@@ -98,7 +97,6 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        // $post = Post::where('id', $id)->first();
         return view('pages.admin.posts.edit',['post' => $post]);
     }
 
@@ -109,7 +107,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         $messages = 
         [
@@ -122,7 +120,6 @@ class PostController extends Controller
             'image' => ['image','mimes:jpeg,png,jpg,gif|max:2048']
         ], $messages);
 
-        $post = Post::where('id', $id)->first();
         $post->slug = Str::slug(($request->input('title')), '-');
         $post->title = $request->title;
         $post->category = $request->category;
@@ -134,28 +131,18 @@ class PostController extends Controller
             $name = time().'.'. $request->image->extension();
             $folder = '/images'; 
             $request->image->move(public_path($folder), $name);
-            // $filePath = Storage::disk('local')->putFileAs($folder, $image, $name);
             $post->image = $name;
         }
 
         $post->save();
-        return redirect()->route('post.index')->with(['status' => 'post updated successfully.']);
+        return redirect()->route('admin.post.index')->with(['status' => 'post updated successfully.']);
 
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-      $post = Post::where('id', $id)->first();
       $post->delete();
-      return redirect()->route('post.index')->with(['status' => 'post delete successfully']);
-    }
-
-
-    public function welcome() {
-        $posts = Post::latest()->paginate(6);
-        $categories = Category::all();
-
-        return view('welcome', compact('posts', 'categories'));
+      return redirect()->route('admin.post.index')->with(['status' => 'post delete successfully']);
     }
 
 }

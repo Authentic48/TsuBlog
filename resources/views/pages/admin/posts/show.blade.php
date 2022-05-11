@@ -9,7 +9,7 @@
         @endif
         <div class="row justify-content-center">
             <div class="mr-auto">
-                <a class="btn btn-outline-primary" href="{{ route('post.index') }}">Go back</a>
+                <a class="btn btn-outline-primary" href="{{ route('admin.post.index') }}">Go back</a>
             </div>
         </div>
         <div class="row">
@@ -21,10 +21,10 @@
                 <div class="d-flex">
                     @foreach ($post->tags as $tag)
                     <span class="mr-4">
-                        {{ $tag->name }}<a  href="{{ route('tags.delete',[ 'id' => $post->id, 'tag_id' => $tag->id] ) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
+                        {{ $tag->name }}<a  href="{{ route('admin.tags.delete',[ 'post' => $post->id, 'tag' => $tag->id] ) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
                             document.getElementById('post').submit();"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
-                         <form id="post" action="{{ route('tags.delete', [ 'id' => $post->id, 'tag_id' => $tag->id]) }}" method="POST">
+                         <form id="post" action="{{ route('admin.tags.delete', [ 'post' => $post->id, 'tag' => $tag->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                         </form>
@@ -32,7 +32,7 @@
                 </div>
 
                 <hr>
-                <a href="{{ route('tags.create', $post->id) }}" class="btn btn-outline-primary btn-sm">Add tags</a>
+                <a href="{{ route('admin.tags.create', $post->id) }}" class="btn btn-outline-primary btn-sm">Add tags</a>
             </div>
         </div>
         <div class="row">
@@ -42,13 +42,13 @@
                         <img src="{{ asset('images/'.$post->image) }}" class="card-img-top"
                             alt="{{ $post->title }}">
                         <div class="card-body">
-                            <a href="{{ route('post.show', $post->id) }}" class="card-title">{{ $post->title }}</a>
+                            <a href="{{ route('admin.post.show', ['post' => $post->id]) }}" class="card-title">{{ $post->title }}</a>
                             <p class="card-text text-truncate">{{ $post->content }}</p>
-                            <a href="{{ route('post.edit', $post->id) }}" class="btn btn-outline-primary btm-sm">edit</a>
+                            <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-outline-primary btm-sm">edit</a>
 
-                            <a href="{{ route('post.delete', $post->id) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
+                            <a href="{{ route('posts.destroy', ['post' => $post->id]) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
                                 document.getElementById('post').submit();">delete</a>
-                            <form id="post" action="{{ route('post.delete', $post->id) }}" method="POST">
+                            <form id="post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                             </form>

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Editing Post</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post.update', $post->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
                         @method('PATCH')
                         @csrf
                         <div class="row mb-3 justify-content-center">

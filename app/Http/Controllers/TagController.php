@@ -18,10 +18,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create(Post $post)
     {
-        $post = Post::findOrFail($id);
-        return view('pages.admin.tags.create', compact('post'));
+      return view('pages.admin.tags.create', ['post' => $post]);
     }
 
      /**
@@ -46,12 +45,11 @@ class TagController extends Controller
         $tag->post_id = $request->post_id;
         $tag->save();
 
-        return redirect()->route('post.show', $request->post_id)->with(['status' => 'tag created successfully.']);
+        return redirect()->route('admin.post.show', $request->post_id)->with(['status' => 'tag created successfully.']);
     }
 
-    public function destroy($id, $tag_id)
+    public function destroy(Post $post, Tag $tag)
     {
-      $tag = Tag::findOrFail($tag_id);
       $tag->delete();
       return redirect()->back()->with(['status' => 'tag delete successfully']);
     }

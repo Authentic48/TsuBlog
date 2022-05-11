@@ -13,38 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',  [App\Http\Controllers\PostController::class, 'welcome'])->name('welcome');
 
-Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
-
-Route::get('/posts/{category}', [App\Http\Controllers\PostController::class, 'posts'])->name('posts');
-
-Route::get('/posts/{category}/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
-
-Auth::routes(['register' =>false, 'reset' => false, 'verify' => false]);
-
+Route::get('/',  [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth'])->middleware(['role:admin'])->prefix('/admin/posts')->group(function () {
+Route::get('/posts/category/{category}', [App\Http\Controllers\PostController::class, 'posts'])->name('posts');
+Route::get('/posts/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::resource('posts', \App\Http\Controllers\PostController::class)->except(['show']);
 
- Route::get('/create', [App\Http\Controllers\PostController::class, 'create'])->name('post.create');
+Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
- Route::post('/store', [App\Http\Controllers\PostController::class, 'store'])->name('post.store');
- 
- Route::get('/edit/{post:id}', [App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
+    Route::resource('posts', \App\Http\Controllers\PostController::class)->except(['show', 'index']);
 
- Route::patch('/update/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('post.update');
-
- Route::delete('/delete/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('post.delete');
-
- Route::get('/', [App\Http\Controllers\PostAdminController::class, 'index'])->name('post.index');
-
- Route::get('/{post:id}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('post.show');
-
- Route::get('/{post:id}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('tags.create');
-
- Route::post('/{id}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('tags.store');
-
- Route::delete('/{id}/tags/{tag_id}', [App\Http\Controllers\TagController::class, 'destroy'])->name('tags.delete');
+ Route::get('posts/', [App\Http\Controllers\PostAdminController::class, 'index'])->name('admin.post.index');
+ Route::get('posts/{post}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('admin.post.show');
+ Route::get('posts/{post}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('admin.tags.create');
+ Route::post('posts/{post}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('admin.tags.store');
+ Route::delete('posts/{post}/tags/{tag}', [App\Http\Controllers\TagController::class, 'destroy'])->name('admin.tags.delete');
 });
 
+Auth::routes(['register' =>false, 'reset' => false, 'verify' => false]);

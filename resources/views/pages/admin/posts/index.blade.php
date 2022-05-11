@@ -9,7 +9,7 @@
         @endif
         <div class="row justify-content-center">
             <div class="mr-auto">
-                <a class="btn btn-outline-primary" href="{{ route('post.create') }}" >Create</a>
+                <a class="btn btn-outline-primary" href="{{ route('posts.create') }}" >Create</a>
             </div>
         </div>
         <div class="row">
@@ -18,13 +18,12 @@
                 <div class="card" >
                     <img src="{{  asset('images/'.$post->image) }}" class="card-img-top" alt="{{ $post->title }}">
                     <div class="card-body flex-body">
-                      <a href="{{ route('post.show', $post->id) }}" class="card-title" style="text-decoration: none; ">{{ $post->title }}</a>
+                      <a href="{{ route('admin.post.show', ['post' => $post->id]) }}" class="card-title" style="text-decoration: none; ">{{ $post->title }}</a>
                       <p  class="card-text text-truncate" style="max-width: 100%">{{ $post->content }}</p>
-                      <a href="{{ route('post.edit', $post->id) }}" class="btn btn-outline-primary btm-sm">edit</a>
-
-                      <a  href="{{ route('post.delete', $post->id) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
+                      <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-outline-primary btm-sm">edit</a>
+                      <a  href="{{ route('posts.destroy', ['post' => $post->id]) }}" class="btn btn-outline-danger " onclick="event.preventDefault();
                         document.getElementById('post').submit();">delete</a>
-                         <form id="post" action="{{ route('post.delete', $post->id) }}" method="POST">
+                         <form id="post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                         </form>

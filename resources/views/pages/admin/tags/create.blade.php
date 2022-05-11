@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">New Tag</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('tags.store', $post->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.tags.store', $post->id) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3 justify-content-center">
