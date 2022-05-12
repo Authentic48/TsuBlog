@@ -29,7 +29,7 @@ class HomeController extends Controller
     }
 
     public function welcome() {
-        $posts = Post::latest()->paginate(6);
+        $posts = Post::latest()->paginate(4);
         $categories = Category::all();
 
         return view('welcome', compact('posts', 'categories'));
