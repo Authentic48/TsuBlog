@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 @foreach ($categories as $category)
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">{{ $category->name }}</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('posts.category', $category->name) }}">{{ $category->name }}</a></li>
                 @endforeach
             </ul>
         </div>

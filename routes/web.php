@@ -17,16 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',  [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/posts/category/{category}', [App\Http\Controllers\PostController::class, 'posts'])->name('posts');
-Route::get('/posts/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
-// Route::resource('posts', \App\Http\Controllers\PostController::class)->except(['show']);
+Route::get('/posts/category/{category}', [App\Http\Controllers\HomeController::class, 'postByCategory'])->name('posts.category');
+Route::get('/posts', [App\Http\Controllers\HomeController::class, 'postIndex'])->name('posts');
+Route::get('/posts/{post:id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
 Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
-    Route::resource('posts', \App\Http\Controllers\PostController::class)->except(['show', 'index']);
+    Route::resource('posts', \App\Http\Controllers\PostController::class)->scoped([ 'post' => 'id' ])->except(['show', 'index']);
 
  Route::get('posts/', [App\Http\Controllers\PostAdminController::class, 'index'])->name('admin.post.index');
- Route::get('posts/{post}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('admin.post.show');
+ Route::get('posts/{post:id}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('admin.post.show');
  Route::get('posts/{post}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('admin.tags.create');
  Route::post('posts/{post}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('admin.tags.store');
  Route::delete('posts/{post}/tags/{id}', [App\Http\Controllers\TagController::class, 'destroy'])->name('admin.tags.delete');

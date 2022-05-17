@@ -34,4 +34,16 @@ class HomeController extends Controller
 
         return view('welcome', compact('posts', 'categories'));
     }
+
+    public function postIndex() {
+        $categories = Category::all();
+       $posts = Post::latest()->paginate(5);
+       return view('pages.posts.index', compact('posts', 'categories')); 
+    }
+
+    public function postByCategory($category){
+        $categories = Category::all();
+        $posts = Post::where('category', $category)->latest()->paginate(5);
+       return view('pages.posts.index', compact('posts', 'categories')); 
+    }
 }
