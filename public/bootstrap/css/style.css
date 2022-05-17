@@ -62,5 +62,18 @@ header.hero .site-heading .sub-heading {
     text-decoration: none;
   }
 
+  header.hero .site-heading .meta,
+  header.hero .site-heading .sub-heading {
+    line-height: 1.1;
+    display: block;
+  }
+
+  header.hero .site-heading .meta {
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
 
   

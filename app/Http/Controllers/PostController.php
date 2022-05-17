@@ -86,7 +86,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('pages.posts.show',['post' => $post]);
+        $categories = Category::all();
+        // dd($post->title);
+        return view('pages.posts.show',['post' => $post, 'categories' => $categories]);
     }
 
       /**

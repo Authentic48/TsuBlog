@@ -18,8 +18,8 @@ Route::get('/',  [App\Http\Controllers\HomeController::class, 'welcome'])->name(
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/posts/category/{category}', [App\Http\Controllers\PostController::class, 'posts'])->name('posts');
-Route::get('/posts/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
-Route::resource('posts', \App\Http\Controllers\PostController::class)->except(['show']);
+Route::get('/posts/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+// Route::resource('posts', \App\Http\Controllers\PostController::class)->except(['show']);
 
 Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 

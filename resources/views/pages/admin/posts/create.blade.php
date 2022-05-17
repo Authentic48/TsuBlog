@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">New Post</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                             @csrf
     
                             <div class="row mb-3 justify-content-center">

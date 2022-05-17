@@ -5,10 +5,10 @@
             <div class="post-preview">
                 <a href="{{ route('posts.show', $post->id) }}">
                     <h2 class="post-title">{{ $post->title }}</h2>
-                    <h3 class="post-subtitle">{{ $post->content }}</h3>
+                    <h3 class="post-subtitle text-truncate">{{ $post->content }}</h3>
                 </a>
                 <p class="post-meta">
-                    {{ $post->created_at->diffForHumans() }}
+                   Posted <span>{{ $post->created_at->diffForHumans() }}</span> 
                 </p>
             </div>
             <hr class="my-4" />
