@@ -29,7 +29,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
  Route::get('posts/', [App\Http\Controllers\PostAdminController::class, 'index'])->name('admin.post.index');
  Route::get('posts/{post:id}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('admin.post.show');
- Route::get('posts/{post}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('admin.tags.create');
+ Route::get('posts/{post:id}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('admin.tags.create');
  Route::post('posts/{post}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('admin.tags.store');
  Route::delete('posts/{post}/tags/{id}', [App\Http\Controllers\TagController::class, 'destroy'])->name('admin.tags.delete');
 });

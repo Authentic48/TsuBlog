@@ -79,6 +79,11 @@ header.hero .site-heading .sub-heading {
     color: #fff;
   }
 
+div .badge {
+  color: black;
+  font-size: 1rem;
+}
+
 
 
 
