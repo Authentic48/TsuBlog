@@ -46,4 +46,9 @@ class HomeController extends Controller
         $posts = Post::where('category', $category)->latest()->paginate(5);
        return view('pages.posts.index', compact('posts', 'categories')); 
     }
+
+    public function about() {
+        $categories = Category::all();
+        return view('pages.posts.about', compact('categories'));
+    }
 }

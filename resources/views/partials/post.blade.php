@@ -13,6 +13,8 @@
             </div>
             <hr class="my-4" />
             @endforeach
+
+            {{ $posts->links() }}
         </div>
     </div>
 </div>
