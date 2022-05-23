@@ -46,7 +46,7 @@
                             <div class="row mb-3 justify-content-center">
                                 <div class="col-md-6">
                                     <label for="category" class="col-md-4 col-form-label">Content</label>
-                                    <textarea type="text" class="form-control @error('content') is-invalid @enderror" name="content"> </textarea>
+                                    <textarea  type="text" class="summernote" name="content"> {{ old('content')}} </textarea>
                                     @error('content')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

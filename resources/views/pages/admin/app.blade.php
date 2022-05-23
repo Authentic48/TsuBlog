@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,18 +18,27 @@
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="css/app.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 </head>
+
 <body>
-       @include('pages.admin.includes.header')
+    @include('pages.admin.includes.header')
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+    <main class="py-4">
+        @yield('content')
+    </main>
 
-        @include('pages.admin.includes.footer')
+    @include('pages.admin.includes.footer')
     </div>
 
-     <!-- Scripts -->
-     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" defer></script>
+    <!-- Scripts -->
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote();
+        });
+    </script>
 </body>
+
 </html>
