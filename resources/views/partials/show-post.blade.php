@@ -4,7 +4,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>{{ $post->title }}</h1>
-                    <h2 class="sub-heading">{{ $post->category }}</h2>
+                    <h2 class="sub-heading"> <a href="{{ route('posts.category', $post->category) }}" style="text-decoration: none;">{{ $post->category }}</a></h2>
                     <span class="meta">
                         Posted {{ $post->created_at->diffForHumans() }}</span>
                     </span>
