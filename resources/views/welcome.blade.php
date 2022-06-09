@@ -4,5 +4,5 @@
 
     @include('partials.hero')
 
-    @include('partials.post')
+    @include('partials.post-landing')
 @endsection

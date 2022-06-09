@@ -28,7 +28,6 @@
                         </form>
                     @endforeach
                 </ul>
-
                 {{ $posts->links() }}
             </div>
         </div>

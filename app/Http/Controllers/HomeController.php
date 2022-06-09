@@ -30,13 +30,13 @@ class HomeController extends Controller
     }
 
     public function welcome() {
-        $posts = Post::latest()->paginate(4);
+        $posts = Post::latest()->paginate(6);
        
         return view('welcome', compact('posts'));
     }
 
     public function postIndex() {
-       $posts = Post::latest()->paginate(5);
+       $posts = Post::latest()->paginate(6);
        return view('pages.posts.index', compact('posts')); 
     }
 
