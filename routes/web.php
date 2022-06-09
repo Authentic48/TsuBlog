@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/',  [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about',  [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 
 
@@ -27,11 +26,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     Route::resource('posts', \App\Http\Controllers\PostController::class)->scoped([ 'post' => 'id' ])->except(['show', 'index']);
 
- Route::get('posts/', [App\Http\Controllers\PostAdminController::class, 'index'])->name('admin.post.index');
+ Route::get('posts/{category}', [App\Http\Controllers\PostAdminController::class, 'index'])->name('admin.post.index');
  Route::get('posts/{post:id}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('admin.post.show');
  Route::get('posts/{post:id}/tags', [App\Http\Controllers\TagController::class, 'create'])->name('admin.tags.create');
  Route::post('posts/{post}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('admin.tags.store');
  Route::delete('posts/{post}/tags/{id}', [App\Http\Controllers\TagController::class, 'destroy'])->name('admin.tags.delete');
+
+ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 Auth::routes(['register' =>false, 'reset' => false, 'verify' => false]);

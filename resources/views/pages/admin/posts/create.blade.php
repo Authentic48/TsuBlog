@@ -11,7 +11,7 @@
                             @csrf
 
                             <div class="row mb-3 justify-content-center">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <label for="title" class="col-md-4 col-form-label">Title</label>
                                     <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
                                         value="{{ old('title') }}">
@@ -23,14 +23,14 @@
                                 </div>
                             </div>
                             <div class="row mb-3 justify-content-center">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="category" class="col-md-4 col-form-label">Category</label>
                                         <select class="form-control @error('category') is-invalid @enderror" name="category"
                                             id="">
                                             <option value="">Choose One...</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                                <option value="{{ old($category->name) }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('category')
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3 justify-content-center">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <label for="image" class="col-md-4 col-form-label">Image</label>
                                     <input type="file" class="form-control @error('image') is-invalid @enderror"
                                         name="image">
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3 justify-content-center">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="category" class="col-md-4 col-form-label">Content</label>
                                         <textarea id="tinymce" name="content" class="form-control"> {{ old('content') }} </textarea>
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3 justify-content-center">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <button type="submit" class="btn btn-outline-primary">Submit</button>
                                 </div>
                             </div>

@@ -20,10 +20,9 @@ class PostAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($category)
     {
-        $posts = Post::latest()->paginate(6);
-        
+        $posts = Post::where('category', $category)->latest()->paginate(5);
         return view('pages.admin.posts.index', compact('posts'));
 
     }
@@ -37,7 +36,6 @@ class PostAdminController extends Controller
      */
     public function show(Post $post)
     {
-        // $post = Post::where('id', $id)->first();
         $posts = Post::latest()->where('id','!=', $post->id)->take(3)->get();
         return view('pages.admin.posts.show', ['post' => $post, 'posts' => $posts]);
     }
