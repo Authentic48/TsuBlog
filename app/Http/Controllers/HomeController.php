@@ -25,20 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $categories = Category::all();
+        return view('home',compact('categories'));
     }
 
     public function welcome() {
         $posts = Post::latest()->paginate(4);
-        $categories = Category::all();
-
-        return view('welcome', compact('posts', 'categories'));
+       
+        return view('welcome', compact('posts'));
     }
 
     public function postIndex() {
-        $categories = Category::all();
        $posts = Post::latest()->paginate(5);
-       return view('pages.posts.index', compact('posts', 'categories')); 
+       return view('pages.posts.index', compact('posts')); 
     }
 
     public function postByCategory($category){
@@ -48,7 +47,6 @@ class HomeController extends Controller
     }
 
     public function about() {
-        $categories = Category::all();
-        return view('pages.posts.about', compact('categories'));
+        return view('pages.posts.about');
     }
 }

@@ -34,7 +34,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.posts.create');
+        $categories = Category::all();
+        return view('pages.admin.posts.create', compact('categories'));
     }
 
     /**
@@ -51,8 +52,8 @@ class PostController extends Controller
         ];
         $request->validate([
             'title' => ['required', 'unique:posts'],
-            'category' => ['required'],
             'content' => ['required'],
+            'category' => ['required'],
             'image' => ['required','mimes:jpeg,png,jpg,gif|max:2048']
         ],$messages);
 
