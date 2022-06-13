@@ -1,4 +1,4 @@
-<footer class="bg-light text-center text-lg-start fixed-bottom">
+<footer class="bg-light fixed-bottom">
     <!-- Copyright -->
     <div class="text-center p-3">
      Copyright © 

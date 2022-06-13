@@ -56,11 +56,6 @@ div .badge {
   color: black;
   font-size: 1rem;
 }
-
-.post-item .img-responsive{
-	margin-bottom: 19px;
-}
-
 .post-item, .post-item .img-responsive{
 	margin: 0 auto;
 	display: table;
@@ -73,10 +68,6 @@ div .badge {
   height: 230px;
 }
 
-.post-item{
-	margin-bottom: 30px;
-}
-
 
 .post-item .post-title{
   font-size: 20px;
@@ -87,10 +78,6 @@ div .badge {
   float: none;
   margin: 2px auto 0px;
   max-width: 299px;
-}
-
-.post-item{
-margin-bottom: 30px;
 }
 
 .post-date{
@@ -112,17 +99,12 @@ margin-bottom: 30px;
 }
 
 .post-show-img .img-responsive {
-  margin: 0 auto;
-	display: table;
-	text-align: center;
-	width: 100%;
-	float: none;
-  color:#000;
-  max-width: 100%;
-  overflow : hidden;
-  height: 100%;
+  width: 100%;
 }
 
+body {
+  margin-bottom:50px;
+}
 
 
 
