@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['welcome']]);
+        $this->middleware('auth', ['except' => ['welcome', 'about', 'postByCategory', 'postIndex']]);
     }
 
     /**
@@ -37,7 +37,8 @@ class HomeController extends Controller
 
     public function postIndex() {
        $posts = Post::latest()->paginate(6);
-       return view('pages.posts.index', compact('posts')); 
+       $categories = Category::all();
+       return view('pages.posts.index', compact('posts', 'categories')); 
     }
 
     public function postByCategory($category){

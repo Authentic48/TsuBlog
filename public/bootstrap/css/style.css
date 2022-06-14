@@ -57,7 +57,7 @@ div .badge {
   font-size: 1rem;
 }
 .post-item, .post-item .img-responsive{
-	margin: 0 auto;
+	margin: 3px auto;
 	display: table;
 	text-align: center;
 	width: 100%;
@@ -106,6 +106,9 @@ body {
   margin-bottom:50px;
 }
 
+div .list-group .list-group-item {
+  padding: 2rem 2rem;
+}
 
 
 

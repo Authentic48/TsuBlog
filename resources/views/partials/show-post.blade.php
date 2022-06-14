@@ -6,7 +6,7 @@
                     <h1 class="post-show-title">{{ $post->title }}</h1>
                     <div>
                         @foreach ($post->tags as $tag)
-                            <span class="badge badge-secondary"> {{ $tag->name }}  </span>
+                            <span class="badge badge-secondary badge-pill"> {{ $tag->name }}  </span>
                         @endforeach
                      </div>
                      <div>
@@ -25,6 +25,7 @@
                     <span class="badge badge-secondary"> {{ $tag->name }}  </span>
                     @endforeach
                 </div>
+
             </div>
         </div>
     </div>
