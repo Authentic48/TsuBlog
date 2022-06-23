@@ -15,7 +15,7 @@
                 @foreach ($posts as $post)
                 <div class="post-item justify-content-center">
                     <div class="post-image">
-                        <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}" class="img-responsive"></a>
+                        <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('images/' . $post->image) }}" class="img-responsive"></a>
                     </div>
                     <div class="post-date">
                         {{ $post->created_at->diffForHumans() }}

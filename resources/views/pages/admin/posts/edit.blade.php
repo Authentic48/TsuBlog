@@ -26,9 +26,9 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="category" class="col-md-4 col-form-label">Category</label>
-                                        <select class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}">
+                                        <select class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category', $post->category) }}">
                                             @foreach ($categories as $category)
-                                                <option value="{{ old($post->category) }}">{{ $category->name }}</option>
+                                                <option>{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('category')

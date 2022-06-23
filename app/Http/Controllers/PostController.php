@@ -62,8 +62,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->content = $request->content;
         $post->category = $request->category;
-        $post->user_id =  Auth::user()->id;
-        $post->slug = Str::slug($request->input('title'), '-');
+        
 
         if ($request->has('image'))
         {
@@ -76,7 +75,7 @@ class PostController extends Controller
         }
         // dd(Storage::disk('local')->url($filePath));
         $post->save();
-        return redirect()->route('admin.post.index')->with(['status' => 'post created successfully.']);
+        return redirect()->route('admin.post.index', $post->category)->with(['status' => 'post created successfully.']);
     }
 
     /**
@@ -123,7 +122,6 @@ class PostController extends Controller
             'image' => ['image','mimes:jpeg,png,jpg,gif|max:2048']
         ], $messages);
 
-        $post->slug = Str::slug(($request->input('title')), '-');
         $post->title = $request->title;
         $post->category = $request->category;
         $post->content = $request->content;
@@ -138,7 +136,7 @@ class PostController extends Controller
         }
 
         $post->save();
-        return redirect()->route('admin.post.index')->with(['status' => 'post updated successfully.']);
+        return redirect()->route('admin.post.index', $post->category)->with(['status' => 'post updated successfully.']);
 
     }
 

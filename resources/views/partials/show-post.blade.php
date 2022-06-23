@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="post-show-img">
-                    <img src="{{ asset('images/'.$post->image) }}" alt="{{ $post->title }}" class="img-responsive">
+                    <img src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}" class="img-responsive">
                 </div>
                 <div>
                     <p>{!! $post->content !!}</p>
@@ -25,7 +25,6 @@
                     <span class="badge badge-secondary"> {{ $tag->name }}  </span>
                     @endforeach
                 </div>
-
             </div>
         </div>
     </div>

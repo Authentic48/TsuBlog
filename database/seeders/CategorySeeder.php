@@ -23,6 +23,10 @@ class CategorySeeder extends Seeder
         Category::create(['name' => 'Entertaiment']);
         Category::create(['name' => 'Health']);
         Category::create(['name' => 'Science']);
-        Category::create(['name' => 'Food']);
+        Category::create(['name' => 'Events']);
+        Category::create(['name' => 'Projects']);
+        Category::create(['name' => 'Achievements']);
+        Category::create(['name' => 'Partners']);
+        Category::create(['name' => 'Education']);
     }
 }
