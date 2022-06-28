@@ -18,9 +18,6 @@ class CategorySeeder extends Seeder
         Category::truncate();
 
         Category::create(['name' => 'Art']);
-        Category::create(['name' => 'Tech']);
-        Category::create(['name' => 'Sport']);
-        Category::create(['name' => 'Entertaiment']);
         Category::create(['name' => 'Health']);
         Category::create(['name' => 'Science']);
         Category::create(['name' => 'Events']);

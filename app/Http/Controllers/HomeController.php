@@ -62,10 +62,27 @@ class HomeController extends Controller
     public function storeNewsToNewspaper(Request $request, Newspaper $newspaper){
         
         $post_id = $request->post_id;
-        // $newspaper_id = $request->newspaper_id;
         $post = Post::findOrFail($post_id);
-        // $newspaper = Newspaper::findOrFail($newspaper_id);
         $post->newspaper()->attach($newspaper);
         return redirect()->route('home');
+    }
+
+
+    public function search(Request $request){
+        $messages = 
+        [
+          'required' => 'This field is required',
+        ];
+        $request->validate([
+            'term' => ['required']
+        ],$messages);
+
+        $posts = Post::query()
+                       ->where('title', 'Like', "%{$request->term}")
+                       ->orWhere('category', 'Like', "%{$request->term}")
+                       ->orWhere('content', 'Like', "%{$request->term}")
+                       ->paginate(6);
+        $categories = Category::all();
+        return view('pages.posts.index', compact('posts', 'categories'));
     }
 }
