@@ -21,10 +21,14 @@ Route::get('/about',  [App\Http\Controllers\HomeController::class, 'about'])->na
 Route::get('/posts/category/{category}', [App\Http\Controllers\HomeController::class, 'postByCategory'])->name('posts.category');
 Route::get('/posts', [App\Http\Controllers\HomeController::class, 'postIndex'])->name('posts');
 Route::get('/posts/{post:id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('/newspapers/{newspaper:id}', [App\Http\Controllers\NewspaperController::class, 'show'])->name('newspapers.show');
+Route::get('/newspapers', [App\Http\Controllers\NewspaperController::class, 'index'])->name('newspapers');
+
 
 Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     Route::resource('posts', \App\Http\Controllers\PostController::class)->scoped([ 'post' => 'id' ])->except(['show', 'index']);
+    Route::resource('newspapers', \App\Http\Controllers\NewspaperController::class)->scoped([ 'post' => 'id' ])->except(['show', 'index']);
 
  Route::get('posts/{category}', [App\Http\Controllers\PostAdminController::class, 'index'])->name('admin.post.index');
  Route::get('posts/{post:id}', [App\Http\Controllers\PostAdminController::class, 'show'])->name('admin.post.show');
@@ -33,6 +37,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
  Route::delete('posts/{post}/tags/{id}', [App\Http\Controllers\TagController::class, 'destroy'])->name('admin.tags.delete');
 
  Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+ Route::get('/newspapers/{newspaper:id}', [App\Http\Controllers\HomeController::class, 'addNews'])->name('newspaper.post');
+ Route::post('/newspapers/{newspaper:id}/store', [App\Http\Controllers\HomeController::class, 'storeNewsToNewspaper'])->name('newspaperpost.store');
+ 
 });
 
 Auth::routes(['register' =>false, 'reset' => false, 'verify' => false]);

@@ -36,4 +36,9 @@ class Post extends Model
   {
     return $this->hasMany(Tag::class);
   }
+
+  public function newspaper()
+  {
+    return $this->belongsToMany(Newspaper::class);
+  }
 }

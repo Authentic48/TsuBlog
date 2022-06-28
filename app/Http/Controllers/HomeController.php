@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Newspaper;
+
 
 class HomeController extends Controller
 {
@@ -26,7 +28,8 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('home',compact('categories'));
+        $newspapers = Newspaper::all();
+        return view('home',compact('categories', 'newspapers'));
     }
 
     public function welcome() {
@@ -49,5 +52,20 @@ class HomeController extends Controller
 
     public function about() {
         return view('pages.posts.about');
+    }
+
+    public function addNews(Newspaper $newspaper){
+        $posts = Post::all();
+        return view('pages.admin.newspaper.addnews', ['newspaper' => $newspaper, 'posts' => $posts]);
+    }
+
+    public function storeNewsToNewspaper(Request $request, Newspaper $newspaper){
+        
+        $post_id = $request->post_id;
+        // $newspaper_id = $request->newspaper_id;
+        $post = Post::findOrFail($post_id);
+        // $newspaper = Newspaper::findOrFail($newspaper_id);
+        $post->newspaper()->attach($newspaper);
+        return redirect()->route('home');
     }
 }
